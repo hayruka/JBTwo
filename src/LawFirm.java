@@ -293,7 +293,53 @@ public class LawFirm {
 	}
 	
 	public static void edit(Case [] cases) {
-		//TO DO:
+		String message = "Which case number would you like to edit";
+		for (int x = 0; x < cases.length; x++) {
+			int caseNum = cases[x].getCaseNum();
+			message += "\n" + (x + 1) + ". " + caseNum;
+		}
+		boolean error;
+		do {
+			try { 
+			int option = Integer.parseInt(JOptionPane.showInputDialog(null, message));
+			error = true;
+			if (option < 0 || option > cases.length) {
+				throw new IndexOutOfBoundsException();
+			}
+			}
+			catch (NumberFormatException e) {
+				error = false;
+				JOptionPane.showMessageDialog(null, "Please enter a valid number");
+			}
+			catch(IndexOutOfBoundsException e) {
+				error = false;
+				JOptionPane.showMessageDialog(null, "Please enter a valid number");
+			}
+		} while(error == false);
+		
+		error = false;
+		do {
+			try { 
+				int option = Integer.parseInt(JOptionPane.showInputDialog( 
+				"What status would you like to change it to?" +
+			    "\n1. Accepted \n2. Rejected \n3.Pending"));
+				error = false;
+				if (option < 1 || option > 3) {
+					throw new IndexOutOfBoundsException();
+				}
+			}
+			catch (NumberFormatException e) {
+				error = true;
+				JOptionPane.showMessageDialog(null, "Please enter a valid number");
+			}
+			catch (IndexOutOfBoundsException e) {
+				error = true;
+				JOptionPane.showMessageDialog(null, "Please enter a valid option");
+			}
+			
+		} while (error == false);
+		
+		
 	}
 	
 	public static void search (){
